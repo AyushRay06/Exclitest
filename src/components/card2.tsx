@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import Image from "next/image"
 import { IconChevronRight } from "@tabler/icons-react"
 
 import Card from "@/assets/tits.jpg"
@@ -26,10 +25,11 @@ export const StripeCard = () => {
         </figure>
         <article className="  p-4 space-y-2">
           <h1 className="text-xl font-semibold capitalize">
-            Incorporate your company
+            Attent Test with one Click.
           </h1>
           <p className="text-base leading-[120%]">
-            Form a legal entity, issue stock, and start accepting payments.
+            Get instant feedback and result of your test just after finishing
+            test. Comes with a user dashboard to track your progress.
           </p>
           <a
             href="#"

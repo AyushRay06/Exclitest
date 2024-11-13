@@ -1,10 +1,9 @@
 "use client"
 import starsBg from "@/assets/stars.png"
-
 import { useState, useEffect } from "react"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import axios from "axios"
-import toast, {Toaster} from 'react-hot-toast'
+import toast, { Toaster } from "react-hot-toast"
 import { useUser } from "@clerk/nextjs"
 
 const AttemptTest = () => {
@@ -14,7 +13,21 @@ const AttemptTest = () => {
   const [answers, setAnswers] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [timeLeft, setTimeLeft] = useState(null)
-  const { user } = useUser()
+  const { user } = useUser() // Clerk hook to get the user
+  const router = useRouter() // Next.js router for redirection
+
+  useEffect(() => {
+    // If the user is not authenticated, redirect to the sign-in page
+    if (!user) {
+      router.push("/sign-in") // Redirect to the sign-in page if not logged in
+      return
+    }
+
+    // After the user signs in, redirect to the AttemptTest page
+    if (user && testId) {
+      router.push(`/attempt-test/${testId}`) // Redirect to the initial test attempt page
+    }
+  }, [user, router, testId])
 
   useEffect(() => {
     const fetchTest = async () => {
@@ -23,7 +36,6 @@ const AttemptTest = () => {
           process.env.NEXT_PUBLIC_API_URL + `/api/tests/${testId}`
         )
         setTest(response.data.test)
-        // Set initial time based on test duration (assuming duration is in minutes)
         if (response.data.test.testAccessPeriod) {
           setTimeLeft(response.data.test.testAccessPeriod * 60) // Convert minutes to seconds
         }
@@ -38,7 +50,6 @@ const AttemptTest = () => {
     }
   }, [testId])
 
-  // Timer effect
   useEffect(() => {
     if (timeLeft === null || timeLeft <= 0) return
 
@@ -65,20 +76,19 @@ const AttemptTest = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if(!e){
-      toast.error("Please attempt the test!");
-      return 
+    if (!e) {
+      toast.error("Please attempt the test!")
+      return
     }
-    // Check if time is up
+
     if (timeLeft <= 0) {
       toast.error("Time is up! You cannot submit the test.") // Show toast if time is up
-      return // Prevent submission if time is up
+      return
     }
 
     setIsSubmitting(true)
 
     try {
-      // Transform answers to match the format in the database
       const formattedAnswers = {}
       Object.keys(answers).forEach((index) => {
         formattedAnswers[index] = answers[index].replace("Option", "")
@@ -91,14 +101,13 @@ const AttemptTest = () => {
           userId: user?.primaryEmailAddress?.emailAddress,
         }
       )
-    
+
       toast.success(
         `Test submitted successfully! Score: ${response.data.score}`
       )
       console.log("Submitted answers:", formattedAnswers)
       console.log("Test result:", response.data)
 
-      // Navigate to results page
       window.location.href = `/test-results/${testId}`
     } catch (error) {
       toast.error("Error submitting test. Please try again.")
@@ -122,10 +131,7 @@ const AttemptTest = () => {
         backgroundImage: `url(${starsBg.src})`,
       }}
     >
-      <Toaster
-      position="top-center"
-      reverseOrder={false}
-    />
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="bg-zinc-200 rounded-lg shadow-md mb-8">
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">

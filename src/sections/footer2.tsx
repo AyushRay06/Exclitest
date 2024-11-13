@@ -17,14 +17,57 @@ export const Footer2 = () => {
           <div className="w-fit flex-col  flex  justify-center">
             <img src={Logo.src} />
             <article className="py-2  2xl:w-80 w-64  space-y-1">
-              <p className="text-sm  leading-[120%] ">
-              Unlock the potential of your testing process with Excelitest. Streamline your workflows and enhance productivity effortlessly.
+              <p className="text-sm  leading-[120%] mt-4 ">
+                Unlock the potential of your testing process with Excelitest.
+                Streamline your workflows and enhance productivity effortlessly.
               </p>
             </article>
           </div>
 
           <div className="sm:block flex sm:mt-0 mt-4  gap-2 sm:w-auto w-full sm:space-y-2 relative z-[1]">
-            <a
+            <p className="font-semibold ">Developed by:</p>
+            <div className="flex gap-x-4 mb-4">
+              <div>
+                <img
+                  className="w-16 h-16 rounded-lg"
+                  src="/kalyan.jpeg"
+                  alt="avatar"
+                  width={40}
+                  height={40}
+                />
+              </div>
+              <div>
+                <img
+                  className="w-40 h-40 rounded-lg"
+                  src="/ayush.jpeg"
+                  alt="avatar"
+                  width={40}
+                  height={40}
+                />
+              </div>
+            </div>
+            <div className="flex gap-x-4">
+              <div>
+                <img
+                  className="w-40 h-40 rounded-lg"
+                  src="/saheb.jpeg"
+                  alt="avatar"
+                  width={100}
+                  height={100}
+                />
+              </div>
+              <div>
+                <Image
+                  className="w-16 h-16 rounded-lg"
+                  src="/a.jpeg"
+                  alt="avatar"
+                  width={40}
+                  height={40}
+                />
+              </div>
+            </div>
+
+            {/* <a
               href="#"
               target="_blank"
               className="bg-gray-50 sm:w-auto w-full   grid place-content-center 2xl:h-40 h-32 2xl:p-10 p-5 rounded-lg"
@@ -61,14 +104,8 @@ export const Footer2 = () => {
                   fill="currentColor"
                 ></path>
               </svg>
-            </a>
+            </a> */}
           </div>
-        </div>
-        <div className="lg:flex hidden">
-          {/* <AnimatedText
-            text="UI-LAYOUT"
-            className="2xl:text-[11rem] text-[12vw]"
-          /> */}
         </div>
       </footer>
     </>

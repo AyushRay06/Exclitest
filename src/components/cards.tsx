@@ -11,7 +11,7 @@ export const Cards = () => {
           <div className="relative">
             <div className="px-6 py-5">
               <div className="group-hover:bg-blue-400 bg-white transition-all duration-500 ease-in-out w-fit px-3 rounded-full text-sm py-1 text-black group-hover:text-white mb-1">
-                exclitest
+                excelitest
               </div>
               <span className="text-lg group-hover:hidden inline-block font-semibold pt-2 text-slate-200 mb-1 transition-all duration-500 ease-in-out">
                 From Excel File
