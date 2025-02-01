@@ -155,10 +155,6 @@ Contributions are welcome!
 
 ---
 
-## 📜 License
 
-This project is licensed under the MIT License.
-
----
 
 *Excelitest* makes test automation seamless, empowering educators and students with an efficient online assessment platform.
